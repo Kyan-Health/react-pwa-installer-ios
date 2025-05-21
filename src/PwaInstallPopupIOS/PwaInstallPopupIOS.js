@@ -57,15 +57,7 @@ const PwaInstallPopupIOS = ({
     ? lang
     : DEFAULT_LANG;
 
-  const clickListener = () => {
-    setOpened(v => {
-      if (v) {
-        saveLastPwaDisplay();
-        removeClickListener(clickListener);
-        return false;
-      }
-      return v;
-    });
+  const clickListener = () => {    
   };
 
   useEffect(() => {
