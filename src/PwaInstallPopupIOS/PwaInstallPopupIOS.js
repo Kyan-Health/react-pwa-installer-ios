@@ -101,7 +101,7 @@ const PwaInstallPopupIOS = ({
           return  <div>
               {instruction}
             </div>
-        })          
+        })}  
           </div>
         </div>
       )}
