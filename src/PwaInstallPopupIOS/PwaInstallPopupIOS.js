@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import classnames from "classnames";
 
-import translations from "./locales.json";
 import shareIcon from "./ic_iphone_share.png";
 
 import {
@@ -45,18 +44,16 @@ const removeClickListener = clickListener => {
 const PwaInstallPopupIOS = ({
   lang,
   appIcon,
-  appName,
+
   styles,
   delay,
   children,
-  force
+  force,
+  instructions = []
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOpen, setOpened] = useState(false);
-  const languageCode = Object.keys(translations).includes(lang)
-    ? lang
-    : DEFAULT_LANG;
-
+  
   const clickListener = () => {    
   };
 
@@ -84,9 +81,6 @@ const PwaInstallPopupIOS = ({
 
   if (!isLoaded) return null;
 
-  const apppNameLabel = appName
-    ? appName
-    : translations[languageCode].APP_NAME_DEFAULT;
   return isOpen ? (
     <div
       style={styles}
@@ -103,25 +97,11 @@ const PwaInstallPopupIOS = ({
             <img className="appIcon" src={appIcon} />
           </div>
           <div className="right">
-            <div>
-              {translations[languageCode].PWA_POPUP_PART1.replace(
-                "{{appName}}",
-                apppNameLabel
-              )}
+        {instructions.map(instruction=> {
+          return  <div>
+              {instruction}
             </div>
-            <div>
-              {translations[languageCode].PWA_POPUP_PART2.replace(
-                "{{appName}}",
-                apppNameLabel
-              )}
-            </div>
-            <div>
-              {translations[languageCode].PWA_POPUP_PART3}
-              <span>
-                <img className="small" src={shareIcon} />
-              </span>
-            </div>
-            <div>{translations[languageCode].PWA_POPUP_PART4}</div>
+        })          
           </div>
         </div>
       )}
@@ -129,14 +109,13 @@ const PwaInstallPopupIOS = ({
   ) : null;
 };
 
-PwaInstallPopupIOS.propTypes = {
-  lang: PropTypes.oneOf(["en", "fr", "pt", "nl"]),
+PwaInstallPopupIOS.propTypes = {  
   children: PropTypes.node,
   styles: PropTypes.object,
+  instructions: PropTypes.array,
   force: PropTypes.bool,
   appIcon: PropTypes.string,
   delay: PropTypes.number,
-  appName: PropTypes.string
 };
 
 PwaInstallPopupIOS.defaultProps = {
