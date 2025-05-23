@@ -53,8 +53,8 @@ const PwaInstallPopupIOS = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOpen, setOpened] = useState(false);
-  
-  const clickListener = () => {    
+
+  const clickListener = () => {
   };
 
   useEffect(() => {
@@ -98,10 +98,10 @@ const PwaInstallPopupIOS = ({
           </div>
           <div className="right">
         {instructions.map(instruction=> {
-          return  <div>
+          return  <div key={instruction}>
               {instruction}
             </div>
-        })}  
+        })}
           </div>
         </div>
       )}
@@ -109,7 +109,7 @@ const PwaInstallPopupIOS = ({
   ) : null;
 };
 
-PwaInstallPopupIOS.propTypes = {  
+PwaInstallPopupIOS.propTypes = {
   children: PropTypes.node,
   styles: PropTypes.object,
   instructions: PropTypes.array,
